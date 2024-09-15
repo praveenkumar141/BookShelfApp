@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BookShelfApp</string>
+    <string name="Hello"> Hey there, </string>
+    <string name="create_account">Create an Account</string>
+    <string name="welcome">Welcome back</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="country">Country</string>
+</resources>
