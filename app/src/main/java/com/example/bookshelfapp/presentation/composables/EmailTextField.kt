@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import com.example.bookshelfapp.R
 import com.example.bookshelfapp.ui.theme.BgColor
@@ -30,21 +31,25 @@ fun EmailTextField(
     var text by remember { mutableStateOf("") }
 
     val textFieldColors = OutlinedTextFieldDefaults.colors(
-        cursorColor = Color.Gray,
+        cursorColor = Color.Black,
         focusedBorderColor = Purple40,
-        focusedLabelColor = Purple80,
-        unfocusedContainerColor = BgColor
+        focusedLabelColor = Color.White,
+        focusedContainerColor = Color.White,
+        unfocusedContainerColor = BgColor,
+        unfocusedLabelColor = Color.Gray
     )
 
     OutlinedTextField(
         value = text,
+        maxLines = 1,
+        singleLine = true,
         modifier = Modifier
             .clip(shape = RoundedCornerShape(4.dp)),
         onValueChange = {
             text = it
             onEmailChange(it)
         },
-        label = { Text(stringResource(R.string.email)) },
+        label = { Text(stringResource(R.string.email),fontFamily = FontFamily.Serif) },
         colors = textFieldColors,
         leadingIcon = {
             Icon(

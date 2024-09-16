@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,14 +30,21 @@ class AuthenticationFragment: Fragment() {
                 KoinContext {
                     var isAuthenticated by remember { mutableStateOf(false) }  // State to track if user is authenticated
                     println("isAuthenticated -- $isAuthenticated")
-                    if (isAuthenticated) {
-                        // Navigate to BookDetailsFragment when authenticated
-                        navigateToBookDetailsFragment()
+                    LaunchedEffect(isAuthenticated) {
+                        if (isAuthenticated) {
+                            // Navigate to BookDetailsFragment when authenticated
+                            navigateToBookDetailsFragment()
+                        }
                     }
                     Navigation(onAuthenticateSuccess = {isAuthenticated = true})
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     private fun navigateToBookDetailsFragment() {

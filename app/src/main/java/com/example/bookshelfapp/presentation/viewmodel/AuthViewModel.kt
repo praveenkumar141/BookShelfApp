@@ -34,7 +34,6 @@ class AuthViewModel(
        _countriesList.value =  getCountryListUseCase.getCountriesList()
     }
     suspend fun getIpDetails() {
-        println("dklfjn ${getCountryByIpUseCase.getCountryByIp()}")
         _ipDetails.value = getCountryByIpUseCase.getCountryByIp()
     }
 

@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -21,7 +23,9 @@ fun BoldTextHeader(text: String) {
         style = TextStyle(
             fontSize = 30.sp,
             fontStyle = FontStyle.Normal,
-            fontWeight = FontWeight.Bold
-        ), textAlign = TextAlign.Center
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.Serif
+        ), textAlign = TextAlign.Center,
+        color = Color.White
     )
 }

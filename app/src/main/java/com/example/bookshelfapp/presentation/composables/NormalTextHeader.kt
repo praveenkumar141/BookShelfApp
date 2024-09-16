@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,6 +27,8 @@ fun NormalTextHeader(text: String) {
             fontSize = 24.sp,
             fontStyle = FontStyle.Normal,
             fontWeight = FontWeight.Normal,
-        ), textAlign = TextAlign.Center
+            fontFamily = FontFamily.Serif
+        ), textAlign = TextAlign.Center,
+        color = Color.White
     )
 }

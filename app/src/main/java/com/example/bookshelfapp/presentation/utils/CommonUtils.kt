@@ -2,7 +2,6 @@ package com.example.bookshelfapp.presentation.utils
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.example.bookshelfapp.domain.entity.BookDetailsResponse
 import java.time.Instant
 import java.time.ZoneId
 

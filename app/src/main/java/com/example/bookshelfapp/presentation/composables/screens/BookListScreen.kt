@@ -2,6 +2,7 @@ package com.example.bookshelfapp.presentation.composables.screens
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,8 +36,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,12 +49,13 @@ import com.example.bookshelfapp.domain.entity.BookDetailsResponse
 import com.example.bookshelfapp.presentation.utils.getRatingOutOf5
 import com.example.bookshelfapp.presentation.utils.toYear
 import com.example.bookshelfapp.presentation.viewmodel.BookDetailsViewModel
+import com.example.bookshelfapp.ui.theme.Olive
+import com.example.bookshelfapp.ui.theme.Tangerine
 import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("NewApi")
 @Composable
 fun BookListScreen() {
-    Spacer(Modifier.height(60.dp))
     val bookDetailsViewModel: BookDetailsViewModel = koinViewModel()
     val bookDetails by bookDetailsViewModel.bookDetails.collectAsState()
     val yearsWithBooks = bookDetailsViewModel.getYearsWithBooks()
@@ -65,11 +70,10 @@ fun BookListScreen() {
             }
     }
 
-    Column(Modifier.fillMaxWidth().padding(horizontal = 20.dp)) {
+    Column(Modifier.fillMaxWidth().background(Color.Black)) {
         // Year Tabs
-        Spacer(Modifier.height(60.dp))
         LazyRow(
-            modifier = Modifier.fillMaxWidth().background(Color.Blue),
+            modifier = Modifier.fillMaxWidth().background(Tangerine),
             state = rememberLazyListState()
         ) {
             items(yearsWithBooks) { year ->
@@ -98,17 +102,17 @@ fun BookListScreen() {
 
 @Composable
 fun TabItem(year: Int, isSelected: Boolean, onClick: () -> Unit) {
-    Column {
+    Column (Modifier.clip(RoundedCornerShape(topStart = if (isSelected) 10.dp else 0.dp, topEnd = if (isSelected) 10.dp else 0.dp)).background(color = if (isSelected) Color.Black else Tangerine)){
         Text(
             text = year.toString(),
-            fontSize = 24.sp,
+            fontSize = 18.sp,
             fontWeight = if(isSelected) FontWeight.Bold else FontWeight.Normal,
+            fontFamily = FontFamily.Serif,
             modifier = Modifier
                 .padding(8.dp)
                 .clickable { onClick() },
-            color = if (isSelected) Color.White else Color.Gray
+            color = if (isSelected) Color.White else Color.Black
         )
-       if(isSelected) Divider(Modifier.width(70.dp), thickness = 4.dp, color = Color.Green)
     }
 
 }
@@ -120,10 +124,11 @@ fun BookItem(index: Int, book: BookDetailsResponse) {
     Row(
         Modifier
             .padding(horizontal = 10.dp)
-            .fillMaxWidth()) {
+            .fillMaxWidth().background(Color.Black).border(1.dp, color = Color.Black).padding(10.dp)) {
         AsyncImage(
             model = book.image,
             contentDescription = null,
+            modifier = Modifier.clip(RoundedCornerShape(5.dp)),
             placeholder = painterResource(id = R.drawable.movies),
             error = painterResource(id = R.drawable.movies)
         )
@@ -134,19 +139,22 @@ fun BookItem(index: Int, book: BookDetailsResponse) {
                 Modifier.width(200.dp),
                 maxLines = 2,
                 fontWeight = FontWeight.Bold,
-                fontSize = 24.sp
+                fontFamily = FontFamily.Serif,
+                fontSize = 18.sp,
+                color = Color.White
             )
 
             Text(
                 text = String.format("Rating %.1f/5", getRatingOutOf5(book.score)),
-                fontSize = 14.sp
+                fontSize = 12.sp,
+                color = Color.White
             )
         }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
             val iconImage =
                 if (isBookMarked) Icons.Filled.Bookmarks else Icons.Outlined.Bookmarks
             IconButton(onClick = { isBookMarked = !isBookMarked }) {
-                Icon(imageVector = iconImage, contentDescription = null)
+                Icon(imageVector = iconImage, contentDescription = null, tint = Color.White)
             }
         }
 

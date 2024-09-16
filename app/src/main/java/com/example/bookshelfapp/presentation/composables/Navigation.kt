@@ -13,18 +13,13 @@ import com.example.bookshelfapp.presentation.composables.screens.SignUpScreen
 import com.example.bookshelfapp.presentation.viewmodel.AuthViewModel
 import org.koin.androidx.compose.koinViewModel
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Navigation(onAuthenticateSuccess: () -> Unit) {
     val navController = rememberNavController()
     val viewModel: AuthViewModel = koinViewModel()
-    LaunchedEffect(viewModel.isLoggedIn()) {
-        if (viewModel.isLoggedIn()) {
-            onAuthenticateSuccess()
-        }
-    }
-    NavHost(navController, startDestination = Screen.SignUpScreen.route, builder = {
+
+    NavHost(navController, startDestination = Screen.LoginScreen.route, builder = {
         composable(Screen.SignUpScreen.route, content = { SignUpScreen(viewModel, navController,onAuthenticateSuccess) })
-        composable(Screen.LoginScreen.route, content = { LoginScreen(viewModel,onAuthenticateSuccess) })
+        composable(Screen.LoginScreen.route, content = { LoginScreen(viewModel,navController,onAuthenticateSuccess) })
     })
 }

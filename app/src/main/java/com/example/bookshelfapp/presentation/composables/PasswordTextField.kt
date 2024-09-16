@@ -23,6 +23,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -39,21 +40,25 @@ fun PasswordTextField(onPasswordChange: (String) -> Unit,) {
     val passwordVisibility = remember { mutableStateOf(false) }
 
     val textFieldColors = OutlinedTextFieldDefaults.colors(
-        cursorColor = Color.Gray,
+        cursorColor = Color.Black,
         focusedBorderColor = Purple40,
-        focusedLabelColor = Purple80,
-        unfocusedContainerColor = BgColor
+        focusedLabelColor = Color.White,
+        focusedContainerColor = Color.White,
+        unfocusedContainerColor = BgColor,
+        unfocusedLabelColor = Color.Gray
     )
 
     OutlinedTextField(
         value = password,
+        maxLines = 1,
+        singleLine = true,
         modifier = Modifier
             .clip(shape = RoundedCornerShape(4.dp)),
         onValueChange = {
             password = it
             onPasswordChange(it)
         },
-        label = { Text(stringResource(R.string.password)) },
+        label = { Text(stringResource(R.string.password),fontFamily = FontFamily.Serif) },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         colors = textFieldColors,
         leadingIcon = {
