@@ -1,8 +1,7 @@
-import com.android.build.api.dsl.Packaging
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -80,6 +79,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -90,15 +90,15 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(platform(libs.koin.bom))
     implementation(libs.koin.core)
-    implementation("io.insert-koin:koin-android:3.5.3")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.12.0")
-    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
+    implementation(libs.koin.android)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.converter.moshi)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.kotlinx.serialization.json)
-    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.9")
-    implementation ("io.insert-koin:koin-androidx-compose:3.5.3")
+    implementation (libs.logging.interceptor)
+    implementation (libs.koin.androidx.compose)
     implementation(libs.coil.compose)
     testImplementation(libs.androidx.benchmark.macro.junit4)
     implementation(libs.kotest.assertions.core.jvm)
@@ -108,4 +108,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.test)
     implementation(libs.accompanist.pager.indicators)
     implementation(libs.accompanist.pager)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 }

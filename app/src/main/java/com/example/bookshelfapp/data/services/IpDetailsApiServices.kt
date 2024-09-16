@@ -16,7 +16,7 @@ object IpDetailsApi {
     private val jsonAdapter = moshi.adapter(UserIpDetailsDto::class.java)
 
     private val request = Request.Builder()
-        .url("http://ip-api.com/json/") // Replace with the correct API endpoint
+        .url("http://ip-api.com/json/")
         .addHeader("Accept", "application/json")
         .build()
 

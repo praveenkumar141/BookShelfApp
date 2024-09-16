@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class AuthViewModel(
     private val getCountryListUseCase: GetCountryListUseCase,
     private val getCountryByIpUseCase: GetCountryByIpUseCase,
-    private val application: Application
+    application: Application
 ):ViewModel() {
 
     private val _countriesList = MutableStateFlow<List<CountryListResponse>>(emptyList())

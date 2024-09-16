@@ -1,6 +1,9 @@
 package com.example.bookshelfapp.di
 
 import IpDetailsApi
+import android.annotation.SuppressLint
+import com.example.bookshelfapp.data.local.BookDatabase
+import com.example.bookshelfapp.data.local.DatabaseProvider
 import com.example.bookshelfapp.data.repositories.AuthRepository
 import com.example.bookshelfapp.data.repositories.BookDetailsRepository
 import com.example.bookshelfapp.data.services.BooksApi
@@ -18,6 +21,7 @@ import com.example.bookshelfapp.presentation.viewmodel.BookDetailsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+@SuppressLint("NewApi")
 val appModule = module {
     factory {
         try {
@@ -51,7 +55,7 @@ val appModule = module {
     factory<BookDetailsRepository> {
         try {
             println("jdhbd Creating BookDetailsRepositoryImpl")
-            BookDetailsRepositoryImpl(bookListApi = get())
+            BookDetailsRepositoryImpl(bookListApi = get(), context = get())
         } catch (e: Exception) {
             println("jdhbd Error creating BookDetailsRepositoryImpl: ${e.message}")
             throw e
@@ -101,11 +105,15 @@ val appModule = module {
     viewModel {
         try {
             println("jdhbd Creating BookDetailsViewModel")
-            BookDetailsViewModel(getBookDetailsUseCase = get())
+            BookDetailsViewModel(getBookDetailsUseCase = get(),)
         } catch (e: Exception) {
             println("jdhbd Error creating BookDetailsViewModel: ${e.message}")
             throw e
         }
+    }
+    single { DatabaseProvider.getDatabase(get()).bookDao() }
+    single {
+        get<BookDatabase>().bookDao()
     }
 }
 

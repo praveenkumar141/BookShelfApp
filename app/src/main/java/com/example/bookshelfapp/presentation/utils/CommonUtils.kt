@@ -1,7 +1,10 @@
 package com.example.bookshelfapp.presentation.utils
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.bookshelfapp.domain.entity.BookDetailsResponse
-import java.util.Calendar
+import java.time.Instant
+import java.time.ZoneId
 
 fun isPasswordValid(password: String): Boolean {
     val hasUppercase = password.any { it.isUpperCase() }
@@ -19,14 +22,15 @@ fun isEmailValid(email: String): Boolean {
     return email.matches(emailRegex.toRegex())
 }
 
-fun extractYearFromTimestamp(timestamp: Long): Int {
-    val calendar = Calendar.getInstance().apply {
-        timeInMillis = timestamp
-    }
-    return calendar.get(Calendar.YEAR)
+@RequiresApi(Build.VERSION_CODES.O)
+fun Long.toYear(): Int {
+    val epochMillis = this * 1000
+    return Instant.ofEpochMilli(epochMillis)
+        .atZone(ZoneId.systemDefault())
+        .year
 }
 
-fun groupBooksByYear(books: List<BookDetailsResponse>): Map<Int, List<BookDetailsResponse>> {
-    return books.groupBy { extractYearFromTimestamp(it.publishedChapterDate) }
+fun getRatingOutOf5(score: Double): Double {
+    val maxScore = 50.0
+    return ((score / maxScore) * 5).coerceAtMost(5.0)
 }
-

@@ -32,11 +32,13 @@ import com.example.bookshelfapp.presentation.composables.NormalTextHeader
 import com.example.bookshelfapp.presentation.composables.PasswordTextField
 import com.example.bookshelfapp.presentation.utils.isEmailValid
 import com.example.bookshelfapp.presentation.utils.isPasswordValid
-import org.koin.androidx.compose.getViewModel
 
 @Composable
-fun SignUpScreen(navController: NavHostController) {
-    val viewModel: AuthViewModel = getViewModel()
+fun SignUpScreen(
+    viewModel: AuthViewModel,
+    navController: NavHostController,
+    onAuthenticateSuccess: () -> Unit
+) {
     val countryList = viewModel.countriesList.collectAsState().value
     val ipDetails = viewModel.ipDetails.collectAsState().value
     var passtext by remember { mutableStateOf("") }
@@ -72,7 +74,11 @@ fun SignUpScreen(navController: NavHostController) {
                 modifier = Modifier.clickable { navController.navigate(Screen.LoginScreen.route) }
             )
             Button(
-                onClick = { navController.navigate(Screen.LoginScreen.route) },
+                onClick = {
+                    viewModel.saveLogin(emailText, passtext)
+                    onAuthenticateSuccess()
+                    println("did authenticate")
+                },
                 enabled = isPasswordValid(passtext) && isEmailValid(emailText)
             ) {
                 Text("SignUp")

@@ -11,16 +11,10 @@ class AuthRepositoryImpl(
     private val ipApi: IpDetailsApi
 ) : AuthRepository {
     override suspend fun getCountriesList(): List<CountryListResponse> {
-        val response = countryApi.getCountriesList()
-        println("lllllll $response")
-        val x = response?.map {
+        val response = countryApi.getCountriesList()?.map {
             CountryListResponse(it.country, it.region)
         }
-        println(x)
-        if(x==null) return emptyList()
-        return x
-
-//        val response = countryApi.getCountriesList() ?: return ""
+        return response?: emptyList()
     }
 
 

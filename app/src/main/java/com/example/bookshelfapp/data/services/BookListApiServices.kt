@@ -1,7 +1,6 @@
 package com.example.bookshelfapp.data.services
 
 import com.example.bookshelfapp.data.dto.BookDetailsResponseDto
-import com.example.bookshelfapp.data.dto.CountryListResponseDto
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -41,7 +40,7 @@ class BooksApi {
     suspend fun getBookDetails(): List<BookDetailsResponseDto> {
         val response = service.getBookDetails()
         return if (response.isSuccessful) {
-            response.body() ?: emptyList() // Return the parsed list directly
+            response.body() ?: emptyList()
         } else {
             println("Error: ${response.errorBody()?.string()}")
             null
