@@ -10,5 +10,6 @@ data class BookEntity(
     val score: Double,
     val popularity: Int,
     val title: String,
-    val publishedChapterDate: Long
+    val publishedChapterDate: Long,
+    val isBookmarked: Boolean = false
 )

@@ -7,6 +7,8 @@ import com.example.bookshelfapp.data.local.DatabaseProvider
 import com.example.bookshelfapp.data.repositories.BookDetailsRepository
 import com.example.bookshelfapp.data.services.BooksApi
 import com.example.bookshelfapp.domain.entity.BookDetailsResponse
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 
 class BookDetailsRepositoryImpl(
     private val bookListApi: BooksApi,
@@ -30,6 +32,26 @@ class BookDetailsRepositoryImpl(
         }
         cacheBooks(response)
         return response
+    }
+
+    override suspend fun bookmarkBook(bookId: String) {
+        val book = bookDao.getBookById(bookId)
+        if (book != null) {
+            bookDao.updateBookmarkStatus(bookId, true)
+        }
+    }
+
+    override suspend fun unbookmarkBook(bookId: String) {
+        val book = bookDao.getBookById(bookId)
+        if (book != null) {
+            bookDao.updateBookmarkStatus(bookId, false)
+        }
+    }
+
+    override suspend fun getBookmarkedBooks(userId: String): List<BookDetailsResponse> {
+        return bookDao.getBookmarkedBooks()
+            .map { entities -> entities.map { it.toDomainModel() } }
+            .first()
     }
 
      private suspend fun cacheBooks(books: List<BookDetailsResponse>) {
