@@ -40,7 +40,6 @@ fun CountryDropDown(countryList: List<CountryListResponse>, ipDetails: String) {
         expanded = isExpanded,
         modifier = Modifier.padding(horizontal = 40.dp),
         onExpandedChange = { expanded ->
-            println("Expanding dropdown: $expanded")
             isExpanded = expanded
         }
     ) {
@@ -65,7 +64,6 @@ fun CountryDropDown(countryList: List<CountryListResponse>, ipDetails: String) {
             onDismissRequest = { isExpanded = false }
         ) {
             countryList.forEach { item ->
-                println("Country: ${item.country}")
                 DropdownMenuItem(
                     text = { Text(text = item.country ?: "Default Country") },
                     onClick = {

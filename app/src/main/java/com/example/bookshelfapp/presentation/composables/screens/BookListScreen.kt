@@ -69,10 +69,15 @@ fun BookListScreen() {
             }
     }
 
-    Column(Modifier.fillMaxWidth().background(Color.Black)) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(Color.Black)) {
         // Year Tabs
         LazyRow(
-            modifier = Modifier.fillMaxWidth().background(Tangerine),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Tangerine),
             state = rememberLazyListState()
         ) {
             items(yearsWithBooks) { year ->
@@ -101,7 +106,16 @@ fun BookListScreen() {
 
 @Composable
 fun TabItem(year: Int, isSelected: Boolean, onClick: () -> Unit) {
-    Column (Modifier.clip(RoundedCornerShape(topStart = if (isSelected) 10.dp else 0.dp, topEnd = if (isSelected) 10.dp else 0.dp)).background(color = if (isSelected) Color.Black else Tangerine)){
+    Column(
+        Modifier
+            .clip(
+                RoundedCornerShape(
+                    topStart = if (isSelected) 10.dp else 0.dp,
+                    topEnd = if (isSelected) 10.dp else 0.dp
+                )
+            )
+            .background(color = if (isSelected) Color.Black else Tangerine)
+    ) {
         Text(
             text = year.toString(),
             fontSize = 18.sp,
@@ -122,7 +136,10 @@ fun BookItem(index: Int, book: BookDetailsResponse) {
     Row(
         Modifier
             .padding(horizontal = 10.dp)
-            .fillMaxWidth().background(Color.Black).border(1.dp, color = Color.Black).padding(10.dp)) {
+            .fillMaxWidth()
+            .background(Color.Black)
+            .border(1.dp, color = Color.Black)
+            .padding(10.dp)) {
         AsyncImage(
             model = book.image,
             contentDescription = null,

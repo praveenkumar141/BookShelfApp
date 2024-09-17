@@ -30,10 +30,10 @@ class AuthViewModel(
         }
     }
 
-    suspend fun getCountriesList() {
+    private suspend fun getCountriesList() {
        _countriesList.value =  getCountryListUseCase.getCountriesList()
     }
-    suspend fun getIpDetails() {
+    private suspend fun getIpDetails() {
         _ipDetails.value = getCountryByIpUseCase.getCountryByIp()
     }
 

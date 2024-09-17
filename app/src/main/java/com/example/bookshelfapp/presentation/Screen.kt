@@ -1,6 +1,6 @@
 package com.example.bookshelfapp.presentation
 
 sealed class Screen(val route: String) {
-    object SignUpScreen : Screen("signup_screen")
-    object LoginScreen : Screen("login_screen")
+    data object SignUpScreen : Screen("signup_screen")
+    data object LoginScreen : Screen("login_screen")
 }
