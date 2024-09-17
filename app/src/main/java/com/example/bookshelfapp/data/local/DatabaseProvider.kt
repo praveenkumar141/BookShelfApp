@@ -13,7 +13,7 @@ object DatabaseProvider {
                 context.applicationContext,
                 BookDatabase::class.java,
                 "book_database"
-            ).build()
+            ).fallbackToDestructiveMigration().build()
             INSTANCE = instance
             instance
         }

@@ -1,8 +1,9 @@
 package com.example.bookshelfapp.domain.repositoriesimpl
 
 import android.content.Context
+import com.example.bookshelfapp.data.mappers.BooksMapper.toDomainModel
+import com.example.bookshelfapp.data.mappers.BooksMapper.toEntity
 import com.example.bookshelfapp.data.local.BookDao
-import com.example.bookshelfapp.data.local.BookEntity
 import com.example.bookshelfapp.data.local.DatabaseProvider
 import com.example.bookshelfapp.data.repositories.BookDetailsRepository
 import com.example.bookshelfapp.data.services.BooksApi
@@ -57,26 +58,4 @@ class BookDetailsRepositoryImpl(
      private suspend fun cacheBooks(books: List<BookDetailsResponse>) {
         bookDao.insertBooks(books.map { it.toEntity() })
     }
-}
-
-fun BookEntity.toDomainModel(): BookDetailsResponse {
-    return BookDetailsResponse(
-        id = this.id,
-        image = this.image,
-        score = this.score,
-        popularity = this.popularity,
-        title = this.title,
-        publishedChapterDate = this.publishedChapterDate
-    )
-}
-
-fun BookDetailsResponse.toEntity(): BookEntity {
-    return BookEntity(
-        id = this.id,
-        image = this.image,
-        score = this.score,
-        popularity = this.popularity,
-        title = this.title,
-        publishedChapterDate = this.publishedChapterDate
-    )
 }
