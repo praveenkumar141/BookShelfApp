@@ -26,16 +26,11 @@ class BookDetailsViewModel(
         viewModelScope.launch {
             val bookDetails = getBookDetailsUseCase.getBookDetails() // Fetch books
             _bookDetails.value = bookDetails.sortedByDescending { it.publishedChapterDate.toYear() }
-            println("got from api in viewmodel ${_bookDetails.value.size}")
         }
     }
 
     fun getYearsWithBooks(): List<Int> {
         _bookDetails.value.forEach { println(it.publishedChapterDate.toYear()) }
-        val res = _bookDetails.value
-            .map { it.publishedChapterDate.toYear() }
-        println(res.distinct())
-        println(res)
         return _bookDetails.value
             .map { it.publishedChapterDate.toYear() }.distinct()
     }
