@@ -11,7 +11,8 @@ object BooksMapper {
             score = this.score,
             popularity = this.popularity,
             title = this.title,
-            publishedChapterDate = this.publishedChapterDate
+            publishedChapterDate = this.publishedChapterDate,
+            isBookmarked = this.isBookmarked
         )
     }
 
@@ -22,7 +23,8 @@ object BooksMapper {
             score = this.score,
             popularity = this.popularity,
             title = this.title,
-            publishedChapterDate = this.publishedChapterDate
+            publishedChapterDate = this.publishedChapterDate,
+            isBookmarked = this.isBookmarked
         )
     }
 }

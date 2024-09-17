@@ -28,7 +28,7 @@ class BookDetailsRepositoryImpl(
                 score = it.score,
                 popularity = it.popularity,
                 title = it.title,
-                publishedChapterDate = it.publishedChapterDate
+                publishedChapterDate = it.publishedChapterDate,
             )
         }
         cacheBooks(response)

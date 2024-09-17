@@ -10,6 +10,8 @@ import com.example.bookshelfapp.data.services.BooksApi
 import com.example.bookshelfapp.data.services.CountriesApi
 import com.example.bookshelfapp.domain.repositoriesimpl.AuthRepositoryImpl
 import com.example.bookshelfapp.domain.repositoriesimpl.BookDetailsRepositoryImpl
+import com.example.bookshelfapp.domain.usecases.BookMarkUseCase
+import com.example.bookshelfapp.domain.usecases.BookMarkUseCaseImpl
 import com.example.bookshelfapp.domain.usecases.GetBookDetailsUseCase
 import com.example.bookshelfapp.domain.usecases.GetBookDetailsUseCaseImpl
 import com.example.bookshelfapp.domain.usecases.GetCountryByIpUseCase
@@ -91,6 +93,15 @@ val appModule = module {
             throw e
         }
     }
+    factory<BookMarkUseCase> {
+        try {
+            println(" Creating GetBookDetailsUseCaseImpl")
+            BookMarkUseCaseImpl(repository = get())
+        } catch (e: Exception) {
+            println(" Error creating GetBookDetailsUseCaseImpl: ${e.message}")
+            throw e
+        }
+    }
 
     viewModel {
         try {
@@ -105,7 +116,7 @@ val appModule = module {
     viewModel {
         try {
             println(" Creating BookDetailsViewModel")
-            BookDetailsViewModel(getBookDetailsUseCase = get(),)
+            BookDetailsViewModel(getBookDetailsUseCase = get(), bookMarkUseCase = get())
         } catch (e: Exception) {
             println(" Error creating BookDetailsViewModel: ${e.message}")
             throw e

@@ -1,6 +1,8 @@
 package com.example.bookshelfapp.presentation.composables.screens
 
 import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -18,7 +20,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material.icons.Icons
@@ -97,7 +98,7 @@ fun BookListScreen() {
         ) {
             itemsIndexed(bookDetails) { index, book ->
                 if (book.publishedChapterDate.toYear() == selectedYear) {
-                    BookItem(index = index, book = book)
+                    BookItem(index = index, book = book, bookDetailsViewModel)
                 }
             }
         }
@@ -130,9 +131,10 @@ fun TabItem(year: Int, isSelected: Boolean, onClick: () -> Unit) {
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun BookItem(index: Int, book: BookDetailsResponse) {
-    var isBookMarked by remember(index) { mutableStateOf(false) }
+fun BookItem(index: Int, book: BookDetailsResponse, bookDetailsViewModel: BookDetailsViewModel) {
+    var isBookMarked by remember(index) { mutableStateOf(book.isBookmarked) }
     Row(
         Modifier
             .padding(horizontal = 10.dp)
@@ -168,7 +170,13 @@ fun BookItem(index: Int, book: BookDetailsResponse) {
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
             val iconImage =
                 if (isBookMarked) Icons.Filled.Bookmarks else Icons.Outlined.Bookmarks
-            IconButton(onClick = { isBookMarked = !isBookMarked }) {
+            IconButton(onClick = {
+                isBookMarked = !isBookMarked
+                if (isBookMarked) {
+                    bookDetailsViewModel.bookmarkBook(book.id)
+                } else {
+                    bookDetailsViewModel.unbookmarkBook(book.id)}
+            }) {
                 Icon(imageVector = iconImage, contentDescription = null, tint = Color.White)
             }
         }
