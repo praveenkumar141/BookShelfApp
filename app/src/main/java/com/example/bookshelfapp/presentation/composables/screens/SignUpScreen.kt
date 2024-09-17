@@ -106,13 +106,13 @@ fun SignUpScreen(
                     ),
                     enabled = isPasswordValid(passtext) && isEmailValid(emailText)
                 ) {
-                    Text("Sign Up", color = Color.Black, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.SignUp), color = Color.Black, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
                 }
                 Spacer(Modifier.height(20.dp))
                 Row {
                     Text("Already have an account?  ", color = Color.White,fontFamily = FontFamily.Serif)
                     Text(
-                        "Sign in",
+                        stringResource(R.string.SignIn),
                         color = Color.White,fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold,    textDecoration = TextDecoration.Underline,
                         modifier = Modifier.clickable { navController.navigate(Screen.LoginScreen.route){launchSingleTop = true} }
                     )

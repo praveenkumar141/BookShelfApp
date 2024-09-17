@@ -87,7 +87,6 @@ fun LoginScreen(viewModel: AuthViewModel,navController: NavHostController, onAut
                     onClick = {
                         val savedEmail = viewModel.getLoginEmail()
                         val savedPassword = viewModel.getLoginPassword()
-                        println(savedPassword)
                         if (emailText == savedEmail && passtext == savedPassword) {
                             onAuthenticateSuccess()
                         } else {
@@ -103,13 +102,13 @@ fun LoginScreen(viewModel: AuthViewModel,navController: NavHostController, onAut
                     ),
                     enabled = isPasswordValid(passtext) && isEmailValid(emailText)
                 ) {
-                    Text("Sign In", color = Color.Black, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.SignIn), color = Color.Black, fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold)
                 }
                 Spacer(Modifier.height(20.dp))
                 Row {
                     Text("New User?  ", color = Color.White,fontFamily = FontFamily.Serif)
                     Text(
-                        "Sign Up",
+                        stringResource(R.string.SignUp),
                         color = Color.White,fontFamily = FontFamily.Serif, fontWeight = FontWeight.Bold,    textDecoration = TextDecoration.Underline,
                         modifier = Modifier.clickable { navController.navigate(Screen.SignUpScreen.route){launchSingleTop = true}
                         }

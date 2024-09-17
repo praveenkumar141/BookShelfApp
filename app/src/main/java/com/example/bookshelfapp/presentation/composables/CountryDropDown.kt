@@ -43,17 +43,10 @@ import com.example.bookshelfapp.domain.entity.CountryListResponse
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountryDropDown(countryList: List<CountryListResponse>, ipDetails: String) {
-    var isExpanded by remember { mutableStateOf(false) } // Default to not expanded
+    var isExpanded by remember { mutableStateOf(false) }
     var selectedOptionText by remember { mutableStateOf(ipDetails) }
-    val focusRequester = remember { FocusRequester() } // Remember the FocusRequester
-    // Log the countryList size to verify it's being passed correctly
-    LaunchedEffect(countryList) {
-        countryList.forEach { item ->
-            println("Country in LaunchedEffect: ${item.country}")
-        }
-    }
+    val focusRequester = remember { FocusRequester() }
 
-    // Manage focus request when TextField is clicked
     LaunchedEffect(isExpanded) {
         if (isExpanded) {
             focusRequester.requestFocus()
@@ -78,10 +71,9 @@ fun CountryDropDown(countryList: List<CountryListResponse>, ipDetails: String) {
             ),
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded) },
             modifier = Modifier.menuAnchor()
-                .focusRequester(focusRequester) // Attach the focusRequester to the TextField
+                .focusRequester(focusRequester)
                 .fillMaxWidth()
                 .clickable {
-                    // Toggle dropdown menu expansion
                     isExpanded = !isExpanded
                 }
         )
@@ -90,9 +82,9 @@ fun CountryDropDown(countryList: List<CountryListResponse>, ipDetails: String) {
             onDismissRequest = { isExpanded = false }
         ) {
             countryList.forEach { item ->
-                println("Country: ${item.country}") // Debugging statement
+                println("Country: ${item.country}")
                 DropdownMenuItem(
-                    text = { Text(text = item.country ?: "Default Country") }, // Use item directly if it's a string
+                    text = { Text(text = item.country ?: "Default Country") },
                     onClick = {
                         isExpanded = false
                         selectedOptionText = item.country ?: "Default"
