@@ -31,7 +31,7 @@ fun main() {
     val jsonAdapter = moshi.adapter(CountryListResponseDto::class.java)
 
     val request = Request.Builder()
-        .url("https://www.jsonkeeper.com/b/CNGI") // Replace with the correct API endpoint
+        .url("https://www.jsonkeeper.com/b/CNGI")
         .addHeader("Accept", "application/json")
         .build()
 

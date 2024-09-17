@@ -87,7 +87,8 @@ fun LoginScreen(viewModel: AuthViewModel,navController: NavHostController, onAut
                     onClick = {
                         val savedEmail = viewModel.getLoginEmail()
                         val savedPassword = viewModel.getLoginPassword()
-                        if (emailText == savedEmail && emailText == savedPassword) {
+                        println(savedPassword)
+                        if (emailText == savedEmail && passtext == savedPassword) {
                             onAuthenticateSuccess()
                         } else {
                             Toast.makeText(context, "Invalid credentials", Toast.LENGTH_SHORT).show()

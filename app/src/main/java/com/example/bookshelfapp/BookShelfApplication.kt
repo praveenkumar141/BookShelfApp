@@ -12,7 +12,7 @@ class BookShelfApplication: Application() {
         startKoin {
             androidContext(this@BookShelfApplication)
             modules(appModule)
-            printLogger() // Enable Koin logging
+            printLogger() // Enabled Koin logging
         }
     }
 }

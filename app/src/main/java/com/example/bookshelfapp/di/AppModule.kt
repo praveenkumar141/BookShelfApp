@@ -25,89 +25,89 @@ import org.koin.dsl.module
 val appModule = module {
     factory {
         try {
-            println("jdhbd Creating Countries()")
+            println(" Creating Countries()")
             CountriesApi()
         } catch (e: Exception) {
-            println("jdhbd Error creating CountriesApi: ${e.message}")
+            println(" Error creating CountriesApi: ${e.message}")
             throw e
         }
     }
 
     factory {
         try {
-            println("jdhbd Creating BookList()")
+            println(" Creating BookList()")
             BooksApi()
         } catch (e: Exception) {
-            println("jdhbd Error creating BookList(): ${e.message}")
+            println(" Error creating BookList(): ${e.message}")
             throw e
         }
     }
-    single { IpDetailsApi } // Assuming IpDetailsApi is a class or singleton
+    single { IpDetailsApi }
     factory<AuthRepository> {
         try {
-            println("jdhbd Creating AuthRepositoryImpl")
+            println(" Creating AuthRepositoryImpl")
             AuthRepositoryImpl(countryApi = get(), ipApi = get())
         } catch (e: Exception) {
-            println("jdhbd Error creating AuthRepositoryImpl: ${e.message}")
+            println(" Error creating AuthRepositoryImpl: ${e.message}")
             throw e
         }
     }
     factory<BookDetailsRepository> {
         try {
-            println("jdhbd Creating BookDetailsRepositoryImpl")
+            println(" Creating BookDetailsRepositoryImpl")
             BookDetailsRepositoryImpl(bookListApi = get(), context = get())
         } catch (e: Exception) {
-            println("jdhbd Error creating BookDetailsRepositoryImpl: ${e.message}")
+            println(" Error creating BookDetailsRepositoryImpl: ${e.message}")
             throw e
         }
     }
 
     factory<GetCountryByIpUseCase> {
         try {
-            println("jdhbd Creating GetCountryByIpUseCaseImpl")
+            println(" Creating GetCountryByIpUseCaseImpl")
             GetCountryByIpUseCaseImpl(authRepository = get())
         } catch (e: Exception) {
-            println("jdhbd Error creating GetCountryByIpUseCaseImpl: ${e.message}")
+            println(" Error creating GetCountryByIpUseCaseImpl: ${e.message}")
             throw e
         }
     }
 
     factory<GetCountryListUseCase> {
         try {
-            println("jdhbd Creating GetCountryListUseCaseImpl")
+            println(" Creating GetCountryListUseCaseImpl")
             GetCountryListUseCaseImpl(authRepository = get())
         } catch (e: Exception) {
-            println("jdhbd Error creating GetCountryListUseCaseImpl: ${e.message}")
+            println(" Error creating GetCountryListUseCaseImpl: ${e.message}")
             throw e
         }
     }
 
     factory<GetBookDetailsUseCase> {
         try {
-            println("jdhbd Creating GetBookDetailsUseCaseImpl")
+            println(" Creating GetBookDetailsUseCaseImpl")
             GetBookDetailsUseCaseImpl(bookDetailsRepository = get())
         } catch (e: Exception) {
-            println("jdhbd Error creating GetBookDetailsUseCaseImpl: ${e.message}")
+            println(" Error creating GetBookDetailsUseCaseImpl: ${e.message}")
             throw e
         }
     }
 
     viewModel {
         try {
-            println("jdhbd Creating AuthViewModel")
+            println(" Creating AuthViewModel")
             AuthViewModel(getCountryListUseCase = get(), getCountryByIpUseCase = get(), application = get())
         } catch (e: Exception) {
-            println("jdhbd Error creating AuthViewModel: ${e.message}")
+            println(" Error creating AuthViewModel: ${e.message}")
             throw e
         }
     }
 
     viewModel {
         try {
-            println("jdhbd Creating BookDetailsViewModel")
+            println(" Creating BookDetailsViewModel")
             BookDetailsViewModel(getBookDetailsUseCase = get(),)
         } catch (e: Exception) {
-            println("jdhbd Error creating BookDetailsViewModel: ${e.message}")
+            println(" Error creating BookDetailsViewModel: ${e.message}")
             throw e
         }
     }

@@ -29,10 +29,8 @@ class AuthenticationFragment: Fragment() {
             setContent {
                 KoinContext {
                     var isAuthenticated by remember { mutableStateOf(false) }  // State to track if user is authenticated
-                    println("isAuthenticated -- $isAuthenticated")
                     LaunchedEffect(isAuthenticated) {
                         if (isAuthenticated) {
-                            // Navigate to BookDetailsFragment when authenticated
                             navigateToBookDetailsFragment()
                         }
                     }
@@ -42,15 +40,10 @@ class AuthenticationFragment: Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
     private fun navigateToBookDetailsFragment() {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, BookDetailsFragment())  // Ensure the container ID is correct
-            .addToBackStack(null)  // Optionally add to backstack if you want to allow back navigation
+            .replace(R.id.fragment_container, BookDetailsFragment())
+            .addToBackStack(null)
             .commit()
     }
 }

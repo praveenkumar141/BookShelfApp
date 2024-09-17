@@ -9,5 +9,7 @@
     <string name="bookShelfApp">BOOKSHELF</string>
     <string name="Book">Book</string>
     <string name="Shelf">Shelf</string>
+    <string name="SignIn">Sign In</string>
+    <string name="SignUp">Sign Up</string>
 
 </resources>

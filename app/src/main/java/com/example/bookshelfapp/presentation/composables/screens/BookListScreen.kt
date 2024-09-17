@@ -49,7 +49,6 @@ import com.example.bookshelfapp.domain.entity.BookDetailsResponse
 import com.example.bookshelfapp.presentation.utils.getRatingOutOf5
 import com.example.bookshelfapp.presentation.utils.toYear
 import com.example.bookshelfapp.presentation.viewmodel.BookDetailsViewModel
-import com.example.bookshelfapp.ui.theme.Olive
 import com.example.bookshelfapp.ui.theme.Tangerine
 import org.koin.androidx.compose.koinViewModel
 
@@ -119,7 +118,6 @@ fun TabItem(year: Int, isSelected: Boolean, onClick: () -> Unit) {
 
 @Composable
 fun BookItem(index: Int, book: BookDetailsResponse) {
-    // Display your book item UI here
     var isBookMarked by remember(index) { mutableStateOf(false) }
     Row(
         Modifier

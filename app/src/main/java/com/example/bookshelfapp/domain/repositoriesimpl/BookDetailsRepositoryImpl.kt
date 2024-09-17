@@ -16,9 +16,7 @@ class BookDetailsRepositoryImpl(
     override suspend fun getBookDetails(): List<BookDetailsResponse> {
         val cachedBooks = bookDao.getAllBooks()
         if (cachedBooks.isNotEmpty()) {
-            val x =  cachedBooks.map { it.toDomainModel() }
-            println("inside cache - ${x.size}")
-            return x
+            return cachedBooks.map { it.toDomainModel() }
         }
         val response = bookListApi.getBookDetails().map {
             BookDetailsResponse(
@@ -34,12 +32,8 @@ class BookDetailsRepositoryImpl(
         return response
     }
 
-     override suspend fun cacheBooks(books: List<BookDetailsResponse>) {
+     private suspend fun cacheBooks(books: List<BookDetailsResponse>) {
         bookDao.insertBooks(books.map { it.toEntity() })
-    }
-
-    override suspend fun clearCache() {
-        bookDao.clearBooks()
     }
 }
 

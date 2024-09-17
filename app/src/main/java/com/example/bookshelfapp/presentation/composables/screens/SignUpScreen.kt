@@ -97,7 +97,6 @@ fun SignUpScreen(
                     onClick = {
                         viewModel.saveLogin(emailText, passtext)
                         onAuthenticateSuccess()
-                        println("did authenticate")
                     }, modifier = Modifier.clip(RoundedCornerShape(10.dp)),
                     colors = ButtonDefaults.buttonColors(
                         contentColor = Color.White,
