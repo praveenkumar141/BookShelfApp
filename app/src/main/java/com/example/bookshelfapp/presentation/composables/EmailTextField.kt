@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import com.example.bookshelfapp.R
 import com.example.bookshelfapp.ui.theme.BgColor
 import com.example.bookshelfapp.ui.theme.Purple40
-import com.example.bookshelfapp.ui.theme.Purple80
 
 @Composable
 fun EmailTextField(

@@ -1,7 +1,6 @@
 package com.example.bookshelfapp.domain.repositoriesimpl
 
 import IpDetailsApi
-import com.example.bookshelfapp.data.dto.CountryListResponseDto
 import com.example.bookshelfapp.data.repositories.AuthRepository
 import com.example.bookshelfapp.data.services.CountriesApi
 import com.example.bookshelfapp.domain.entity.CountryListResponse
@@ -19,7 +18,7 @@ class AuthRepositoryImpl(
 
 
     override suspend fun getIpDetails(): String {
-        val res = try {
+        return try {
             val response = ipApi.fetchIpDetails()
             response?.let {
                 "${it.country}"
@@ -27,6 +26,5 @@ class AuthRepositoryImpl(
         } catch (e: Exception) {
             "Error: ${e.message}"
         }
-        return res
     }
 }

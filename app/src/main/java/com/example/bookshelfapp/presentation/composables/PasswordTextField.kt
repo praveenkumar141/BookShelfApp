@@ -7,7 +7,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -31,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import com.example.bookshelfapp.R
 import com.example.bookshelfapp.ui.theme.BgColor
 import com.example.bookshelfapp.ui.theme.Purple40
-import com.example.bookshelfapp.ui.theme.Purple80
 
 @Composable
 fun PasswordTextField(onPasswordChange: (String) -> Unit,) {
