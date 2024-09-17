@@ -39,28 +39,16 @@ class AuthViewModel(
 
     private val preferenceHelper = PreferenceHelper(application)
 
-    // Save login details
     fun saveLogin(email: String, password: String) {
         preferenceHelper.saveLoginDetails(email, password)
     }
 
-    // Check if user is logged in
-    fun isLoggedIn(): Boolean {
-        return preferenceHelper.isLoggedIn()
-    }
-
-    // Get saved login details
     fun getLoginEmail(): String? {
         return preferenceHelper.getLoginEmail()
     }
 
     fun getLoginPassword(): String? {
         return preferenceHelper.getLoginPassword()
-    }
-
-    // Logout user
-    fun logout() {
-        preferenceHelper.clearLoginDetails()
     }
 
 }
